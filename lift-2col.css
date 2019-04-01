@@ -1,0 +1,84 @@
+
+/* CSS Document for lift to print via PrinceXML */
+lift {
+  font-family: 'Charis SIL';
+  font-size: 10pt;
+  column-count: 2 ;
+  column-fill:balance; 
+}
+
+header, reversal, gloss { display: none; }
+entry {display:block;  
+  padding-left: 22px ;
+  text-indent: -22px ;
+  string-set: hom attr(order)}
+lexical-unit form text:after {content: string(hom, start);vertical-align: sub; font-size:80%}
+sense {display:block;  
+  padding-left: 0px ;
+  text-indent: -7px ;
+ }
+sense::before {content:attr(order); font-size: 90%; font-weight:bold}
+sense[order="1"] {display:inline}     
+sense[order=""] {display:inline;}   /*
+sense[order=0]::before {content:none}    */
+
+*:lang(sjm) {font-weight:bold;}
+*[lang="en"] {}
+
+example form text {font-style:italic;}
+translation form text {font-style:normal;}
+
+grammatical-info {
+  content: attr(value);font-weight:300;font-style:italic;
+}
+
+
+lexical-unit form text {string-set: lexeme content() ; }
+
+note:before {content: attr(type) ":"; text-transform:capitalize; font-size: 80%; color:grey;font-style:italic;}
+relation:before {content: attr(type) " "; text-transform:capitalize; font-size: 80%; color:grey;font-style:italic;}
+relation {content:  attr(ref)}
+trait[type=semantic-domain-ddp4] {content: "Group: " attr(value)} /* Matches Flex LIFT trait. */
+trait[type=semantic-domain] {content: "Group: " attr(value)} /* Matches Lexique-Pro LIFT trait. */
+/* CSS Document  do the page layouts */
+@page {
+  size: 165mm 194mm;
+        margin-bottom:1.5cm;
+        margin-top:2.5cm;
+
+  @top-center { padding-top: 0.9cm;
+        content: counter(page);
+        
+    }
+  @top-right {padding-top: 0.9cm;
+    content: string(lexeme, last);
+  }
+  @top-left {padding-top: 0.9cm;
+    content: string(lexeme, first);
+  }
+}
+@page:first {margin: 1.2cm;margin-left: 1.9cm;
+    @bottom-center {
+        content: counter(page);
+    }
+    @top-center {
+        content: none;
+    }
+  @top-right {
+    content: none;
+  }
+  @top-left {
+    content: none;
+  }
+}
+@page:left {
+    margin-left: 1.2cm;
+    margin-right: 1.9cm; 
+
+}
+@page:right {
+    margin-left: 1.9cm;
+    margin-right: 1.2cm;
+}
+
+
